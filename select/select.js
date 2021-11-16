@@ -1,7 +1,8 @@
 const getTemplate = (placeholder) => {
+    const text = placeholder ?? 'Текст по умолчанию'
     return `
         <div class="select__input" data-type="input">
-            <span>${placeholder}</span>
+            <span>${text}</span>
             <i class="fa fa-chevron-down" data-type="arrow"></i>
         </div>
         <div class="select__dropdown">
