@@ -137,8 +137,8 @@ function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollect
 
 function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
 
-var getTemplate = function getTemplate() {
-  return "\n        <div class=\"select__input\" data-type=\"input\">\n            <span>Text</span>\n            <i class=\"fa fa-chevron-down\" data-type=\"arrow\"></i>\n        </div>\n        <div class=\"select__dropdown\">\n            <ul class=\"select__list\">\n                <li class=\"select__item\">123</li>\n                <li class=\"select__item\">123</li>\n                <li class=\"select__item\">123</li>\n                <li class=\"select__item\">123</li>\n                <li class=\"select__item\">123</li>\n                <li class=\"select__item\">123</li>\n                <li class=\"select__item\">123</li>\n                <li class=\"select__item\">123</li>\n            </ul>\n        </div>\n    ";
+var getTemplate = function getTemplate(placeholder) {
+  return "\n        <div class=\"select__input\" data-type=\"input\">\n            <span>".concat(placeholder, "</span>\n            <i class=\"fa fa-chevron-down\" data-type=\"arrow\"></i>\n        </div>\n        <div class=\"select__dropdown\">\n            <ul class=\"select__list\">\n                <li class=\"select__item\">123</li>\n                <li class=\"select__item\">123</li>\n                <li class=\"select__item\">123</li>\n                <li class=\"select__item\">123</li>\n                <li class=\"select__item\">123</li>\n                <li class=\"select__item\">123</li>\n                <li class=\"select__item\">123</li>\n                <li class=\"select__item\">123</li>\n            </ul>\n        </div>\n    ");
 };
 
 var _render = /*#__PURE__*/new WeakSet();
@@ -154,6 +154,7 @@ var Select = /*#__PURE__*/function () {
     _classPrivateMethodInitSpec(this, _render);
 
     this.$el = document.querySelector(selector);
+    this.options = options;
 
     _classPrivateMethodGet(this, _render, _render2).call(this);
 
@@ -206,8 +207,9 @@ var Select = /*#__PURE__*/function () {
 exports.Select = Select;
 
 function _render2() {
+  var placeholder = this.options.placeholder;
   this.$el.classList.add('select');
-  this.$el.innerHTML = getTemplate();
+  this.$el.innerHTML = getTemplate(placeholder);
 }
 
 function _setup2() {
@@ -294,7 +296,9 @@ var _select = require("./select/select");
 
 require("./select/styles.scss");
 
-var select = new _select.Select('#select', {});
+var select = new _select.Select('#select', {
+  placeholder: 'Выбери, пожалуйста, элемент'
+});
 window.s = select;
 },{"./select/select":"select/select.js","./select/styles.scss":"select/styles.scss"}],"../../Users/Admin/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -324,7 +328,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65393" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53787" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
