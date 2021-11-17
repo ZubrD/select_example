@@ -237,6 +237,7 @@ var Select = /*#__PURE__*/function () {
     key: "destroy",
     value: function destroy() {
       this.$el.removeEventListener('click', this.clickHandler);
+      this.$el.innerHTML = '';
     }
   }]);
 
