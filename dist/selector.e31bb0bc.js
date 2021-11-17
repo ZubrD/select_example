@@ -143,11 +143,14 @@ var getTemplate = function getTemplate() {
   var selectedId = arguments.length > 2 ? arguments[2] : undefined;
   var text = placeholder !== null && placeholder !== void 0 ? placeholder : 'Текст по умолчанию';
   var items = data.map(function (item) {
+    var cls = '';
+
     if (item.id === selectedId) {
       text = item.value;
+      cls = 'selected';
     }
 
-    return "\n            <li class=\"select__item\" data-type=\"item\" data-id=\"".concat(item.id, "\">").concat(item.value, "</li>\n        ");
+    return "\n            <li class=\"select__item ".concat(cls, "\" data-type=\"item\" data-id=\"").concat(item.id, "\">").concat(item.value, "</li>\n        ");
   });
   return "\n        <div class=\"select__input\" data-type=\"input\">\n            <span data-type=\"value\">".concat(text, "</span>\n            <i class=\"fa fa-chevron-down\" data-type=\"arrow\"></i>\n        </div>\n        <div class=\"select__dropdown\">\n            <ul class=\"select__list\">\n                ").concat(items.join(''), "\n                \n            </ul>\n        </div>\n    ");
 };
@@ -337,7 +340,7 @@ require("./select/styles.scss");
 
 var select = new _select.Select('#select', {
   placeholder: 'Выбери, пожалуйста, элемент',
-  selectedId: '5',
+  selectedId: '2',
   data: [{
     id: '1',
     value: 'React'
