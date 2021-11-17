@@ -142,9 +142,9 @@ var getTemplate = function getTemplate() {
   var placeholder = arguments.length > 1 ? arguments[1] : undefined;
   var text = placeholder !== null && placeholder !== void 0 ? placeholder : 'Текст по умолчанию';
   var items = data.map(function (item) {
-    return "\n            <li class=\"select__item\">".concat(item.value, "</li>\n        ");
+    return "\n            <li class=\"select__item\" data-type=\"item\" data-id=\"".concat(item.id, "\">").concat(item.value, "</li>\n        ");
   });
-  return "\n        <div class=\"select__input\" data-type=\"input\">\n            <span>".concat(text, "</span>\n            <i class=\"fa fa-chevron-down\" data-type=\"arrow\"></i>\n        </div>\n        <div class=\"select__dropdown\">\n            <ul class=\"select__list\">\n                ").concat(items.join(''), "\n                \n            </ul>\n        </div>\n    ");
+  return "\n        <div class=\"select__input\" data-type=\"input\">\n            <span data-type=\"value\">".concat(text, "</span>\n            <i class=\"fa fa-chevron-down\" data-type=\"arrow\"></i>\n        </div>\n        <div class=\"select__dropdown\">\n            <ul class=\"select__list\">\n                ").concat(items.join(''), "\n                \n            </ul>\n        </div>\n    ");
 };
 
 var _render = /*#__PURE__*/new WeakSet();
@@ -161,6 +161,7 @@ var Select = /*#__PURE__*/function () {
 
     this.$el = document.querySelector(selector);
     this.options = options;
+    this.selectedId = null;
 
     _classPrivateMethodGet(this, _render, _render2).call(this);
 
@@ -174,12 +175,32 @@ var Select = /*#__PURE__*/function () {
 
       if (type === 'input') {
         this.toggle();
+      } else if (type === 'item') {
+        var id = event.target.dataset.id;
+        console.log('id', id);
+        this.select(id);
       }
     }
   }, {
     key: "isOpen",
     get: function get() {
       return this.$el.classList.contains('open');
+    }
+  }, {
+    key: "current",
+    get: function get() {
+      var _this = this;
+
+      return this.options.data.find(function (item) {
+        return item.id === _this.selectedId;
+      });
+    }
+  }, {
+    key: "select",
+    value: function select(id) {
+      this.selectedId = id;
+      this.$value.textContent = this.current.value;
+      this.close();
     }
   }, {
     key: "toggle",
@@ -224,6 +245,7 @@ function _setup2() {
   this.clickHandler = this.clickHandler.bind(this);
   this.$el.addEventListener('click', this.clickHandler);
   this.$arrow = this.$el.querySelector('[data-type="arrow"]');
+  this.$value = this.$el.querySelector('[data-type="value"]');
 }
 },{}],"../../Users/Admin/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
