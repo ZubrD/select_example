@@ -185,7 +185,6 @@ var Select = /*#__PURE__*/function () {
         this.toggle();
       } else if (type === 'item') {
         var id = event.target.dataset.id;
-        console.log('id', id);
         this.select(id);
       } else if (type === 'backdrop') {
         this.close();
@@ -214,6 +213,7 @@ var Select = /*#__PURE__*/function () {
         el.classList.remove('selected');
       });
       this.$el.querySelector("[data-id=\"".concat(id, "\"]")).classList.add('selected');
+      this.options.onSelect ? this.options.onSelect(this.current) : null;
       this.close();
     }
   }, {
@@ -343,7 +343,7 @@ require("./select/styles.scss");
 
 var select = new _select.Select('#select', {
   placeholder: 'Выбери, пожалуйста, элемент',
-  selectedId: '2',
+  // selectedId: '2',
   data: [{
     id: '1',
     value: 'React'
@@ -362,7 +362,10 @@ var select = new _select.Select('#select', {
   }, {
     id: '6',
     value: 'Nest'
-  }]
+  }],
+  onSelect: function onSelect(item) {
+    console.log('Selected Item', item);
+  }
 });
 window.s = select;
 },{"./select/select":"select/select.js","./select/styles.scss":"select/styles.scss"}],"../../Users/Admin/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {

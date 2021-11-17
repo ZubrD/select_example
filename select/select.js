@@ -57,7 +57,6 @@ export class Select {
             this.toggle()
         } else if (type === 'item') {
             const id = event.target.dataset.id
-            console.log('id', id)
             this.select(id)
         } else if (type === 'backdrop') {
             this.close()
@@ -80,6 +79,9 @@ export class Select {
             el.classList.remove('selected')
         })
         this.$el.querySelector(`[data-id="${id}"]`).classList.add('selected')
+
+        this.options.onSelect ? this.options.onSelect(this.current) : null
+
         this.close()
     }
 
