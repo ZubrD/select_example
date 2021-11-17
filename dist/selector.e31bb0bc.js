@@ -140,8 +140,13 @@ function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(
 var getTemplate = function getTemplate() {
   var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var placeholder = arguments.length > 1 ? arguments[1] : undefined;
+  var selectedId = arguments.length > 2 ? arguments[2] : undefined;
   var text = placeholder !== null && placeholder !== void 0 ? placeholder : 'Текст по умолчанию';
   var items = data.map(function (item) {
+    if (item.id === selectedId) {
+      text = item.value;
+    }
+
     return "\n            <li class=\"select__item\" data-type=\"item\" data-id=\"".concat(item.id, "\">").concat(item.value, "</li>\n        ");
   });
   return "\n        <div class=\"select__input\" data-type=\"input\">\n            <span data-type=\"value\">".concat(text, "</span>\n            <i class=\"fa fa-chevron-down\" data-type=\"arrow\"></i>\n        </div>\n        <div class=\"select__dropdown\">\n            <ul class=\"select__list\">\n                ").concat(items.join(''), "\n                \n            </ul>\n        </div>\n    ");
@@ -161,7 +166,7 @@ var Select = /*#__PURE__*/function () {
 
     this.$el = document.querySelector(selector);
     this.options = options;
-    this.selectedId = null;
+    this.selectedId = options.selectedId;
 
     _classPrivateMethodGet(this, _render, _render2).call(this);
 
@@ -242,7 +247,7 @@ function _render2() {
       placeholder = _this$options.placeholder,
       data = _this$options.data;
   this.$el.classList.add('select');
-  this.$el.innerHTML = getTemplate(data, placeholder);
+  this.$el.innerHTML = getTemplate(data, placeholder, this.selectedId);
 }
 
 function _setup2() {
@@ -332,6 +337,7 @@ require("./select/styles.scss");
 
 var select = new _select.Select('#select', {
   placeholder: 'Выбери, пожалуйста, элемент',
+  selectedId: '5',
   data: [{
     id: '1',
     value: 'React'
