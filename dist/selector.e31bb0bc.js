@@ -152,7 +152,7 @@ var getTemplate = function getTemplate() {
 
     return "\n            <li class=\"select__item ".concat(cls, "\" data-type=\"item\" data-id=\"").concat(item.id, "\">").concat(item.value, "</li>\n        ");
   });
-  return "\n        <div class=\"select__input\" data-type=\"input\">\n            <span data-type=\"value\">".concat(text, "</span>\n            <i class=\"fa fa-chevron-down\" data-type=\"arrow\"></i>\n        </div>\n        <div class=\"select__dropdown\">\n            <ul class=\"select__list\">\n                ").concat(items.join(''), "\n                \n            </ul>\n        </div>\n    ");
+  return "\n        <div class=\"select__backdrop\" data-type=\"backdrop\"></div>\n        <div class=\"select__input\" data-type=\"input\">\n            <span data-type=\"value\">".concat(text, "</span>\n            <i class=\"fa fa-chevron-down\" data-type=\"arrow\"></i>\n        </div>\n        <div class=\"select__dropdown\">\n            <ul class=\"select__list\">\n                ").concat(items.join(''), "\n                \n            </ul>\n        </div>\n    ");
 };
 
 var _render = /*#__PURE__*/new WeakSet();
@@ -187,6 +187,8 @@ var Select = /*#__PURE__*/function () {
         var id = event.target.dataset.id;
         console.log('id', id);
         this.select(id);
+      } else if (type === 'backdrop') {
+        this.close();
       }
     }
   }, {
